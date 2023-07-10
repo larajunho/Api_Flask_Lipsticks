@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from decimal import Decimal
 import json
+from flask_cors import CORS
 
 # Load environment variables from .env file
 load_dotenv()
@@ -15,7 +16,9 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         return super(DecimalEncoder, self).default(o)
 
+
 app = Flask(__name__)
+CORS(app)
 swagger = Swagger(app, template_file='swagger_doc.yml')
 app.json_encoder = DecimalEncoder
 
