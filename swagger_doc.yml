@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  title: Get All Products API
+  version: 1.0.0
+paths:
+  /get_all_products:
+    get:
+      summary: Retrieve all products
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+  /insert_product:
+    post:
+      summary: Insert a new product
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Product object to be inserted
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the product
+              price:
+                type: number
+                format: double
+                description: The price of the product
+            required:
+              - name
+              - price
+  /delete_product:
+    post:
+      summary: Delete a product by ID
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Product ID to be deleted
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: The ID of the product to delete
+            required:
+              - id
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The unique identifier for the product
+      name:
+        type: string
+        description: The name of the product
+      brand:
+         type: string
+         description: The Brand of the product
+      type:
+         type: string
+         description: The type of the product
+      price:
+        type: number
+        format: double
+        description: The price of the product
