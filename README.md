@@ -73,3 +73,8 @@ Antes de iniciar, certifique-se de ter os seguintes requisitos instalados em seu
    ```
 
    O servidor Flask será iniciado e estará pronto para receber solicitações.
+
+## Consultando o Swagger
+
+1. A API pode ser consultada no seguinte endereço:
+   http://127.0.0.1:5000/apidocs/#/
