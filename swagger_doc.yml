@@ -13,6 +13,51 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Product"
+  /get_address:
+    get:
+      summary: Get address information by Brazilian postal code (CEP)
+      parameters:
+        - in: query
+          name: cep
+          description: The Brazilian postal code (CEP) to retrieve address information for.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              cep:
+                type: string
+                description: The Brazilian postal code (CEP).
+              logradouro:
+                type: string
+                description: The street address.
+              complemento:
+                type: string
+                description: Additional address information.
+              bairro:
+                type: string
+                description: The neighborhood.
+              localidade:
+                type: string
+                description: The city.
+              uf:
+                type: string
+                description: The state abbreviation.
+              ibge:
+                type: string
+                description: The IBGE code.
+              gia:
+                type: string
+                description: The GIA code.
+              ddd:
+                type: string
+                description: The DDD code.
+              siafi:
+                type: string
+                description: The SIAFI code.
   /insert_product:
     post:
       summary: Insert a new product
@@ -36,6 +81,10 @@ paths:
                 type: number
                 format: double
                 description: The price of the product
+              amount:
+                type: number
+                format: integer
+                description: The amount of items in stock
               type:
                 type: string
                 description: The type of the product (lipstick or gloss)
@@ -44,24 +93,58 @@ paths:
               - price
               - type
               - brand
-  /delete_product:
-    post:
-      summary: Delete a product by ID
+              - amount
+  /edit_product:
+    put:
+      summary: overwrites a product
       consumes:
         - application/json
       parameters:
         - in: body
           name: body
-          description: Product ID to be deleted
+          description: Product object to be used as replacement
           required: true
           schema:
             type: object
             properties:
               id:
                 type: integer
-                description: The ID of the product to delete
+                description: The ID of the product to replace
+              brand:
+                type: string
+                description: The brand of the product
+              name:
+                type: string
+                description: The name of the product
+              price:
+                type: number
+                format: double
+                description: The price of the product
+              amount:
+                type: number
+                format: integer
+                description: The amount of items in stock
+              type:
+                type: string
+                description: The type of the product (lipstick or gloss)
             required:
               - id
+              - name
+              - price
+              - type
+              - brand
+              - amount
+  /delete_product:
+    delete:
+      summary: Delete a product by ID
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          description: The ID of the product to delete
+          required: true
+          type: integer
 definitions:
   Product:
     type: object
@@ -83,3 +166,7 @@ definitions:
         type: number
         format: double
         description: The price of the product
+      amount:
+        type: number
+        format: integer
+        description: The amount of items in stock

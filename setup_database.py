@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(255) NOT NULL,
     brand VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
+    price DECIMAL(10, 2) NOT NULL,
+    amount INT NOT NULL
 )
 '''
 cursor.execute(create_table_query)
@@ -50,13 +51,13 @@ connection.commit()
 # Insert initial data into the 'products' table
 
 insert_data_query = '''
-INSERT INTO products (name, brand, type, price) VALUES
-    ('Candy K', 'Kylie Cosmetics', 'Batom', 159.90),
-    ('Color Sensational', 'Maybelline', 'Batom', 30.00),
-    ('Dragon Girl', 'NARS', 'Batom', 110.50),
-    ('Russian Red', 'Mac', 'Batom', 90.00),
-    ('Lip Injection Plump', 'Too Faced', 'Gloss', 169.99),
-    ('Diva', 'Mac', 'Batom', 95.90)
+INSERT INTO products (name, brand, type, price, amount) VALUES
+    ('Candy K', 'Kylie Cosmetics', 'Batom', 159.90, 10),
+    ('Color Sensational', 'Maybelline', 'Batom', 30.00, 10),
+    ('Dragon Girl', 'NARS', 'Batom', 110.50, 10),
+    ('Russian Red', 'Mac', 'Batom', 90.00, 10),
+    ('Lip Injection Plump', 'Too Faced', 'Gloss', 169.99, 10),
+    ('Diva', 'Mac', 'Batom', 95.90, 10)
 '''
 
 cursor.execute(insert_data_query)
